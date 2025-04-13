@@ -5,7 +5,11 @@ class Validator(ABC):
     def __set_name__(self, owner: "BurgerRecipe", name: str) -> None:
         self.protected_name = "_" + name
 
-    def __get__(self, instance: "BurgerRecipe", owner: "BurgerRecipe") -> None:
+    def __get__(
+            self,
+            instance: "BurgerRecipe",
+            owner: "BurgerRecipe"
+    ) -> int | str:
         return getattr(instance, self.protected_name)
 
     def __set__(self, instance: "BurgerRecipe", value: int | str) -> None:
@@ -22,7 +26,7 @@ class Number(Validator):
         self.min_value = min_value
         self.max_value = max_value
 
-    def validate(self, value: int) -> None:
+    def validate(self, value: int | str) -> None:
         if not isinstance(value, int):
             raise TypeError("Quantity should be integer.")
 
