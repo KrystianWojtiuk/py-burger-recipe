@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-
+from typing import Any
 
 class Validator(ABC):
     def __set_name__(self, owner: "BurgerRecipe", name: str) -> None:
@@ -17,7 +17,7 @@ class Validator(ABC):
         setattr(instance, self.protected_name, value)
 
     @abstractmethod
-    def validate(self, value: int | str) -> None:
+    def validate(self, value: Any) -> None:
         pass
 
 
@@ -26,7 +26,7 @@ class Number(Validator):
         self.min_value = min_value
         self.max_value = max_value
 
-    def validate(self, value: int | str) -> None:
+    def validate(self, value: Any) -> None:
         if not isinstance(value, int):
             raise TypeError("Quantity should be integer.")
 
