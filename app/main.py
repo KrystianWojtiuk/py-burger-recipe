@@ -1,6 +1,7 @@
 from abc import abstractmethod, ABC
 from typing import Any
 
+
 class Validator(ABC):
     def __set_name__(self, owner: "BurgerRecipe", name: str) -> None:
         self.protected_name = "_" + name
